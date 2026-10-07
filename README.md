@@ -61,7 +61,7 @@ A full-stack smart public transportation system that helps passengers search rou
 - SockJS
 - Maven
 
-### Database and APIs
+### Database and External APIs
 
 - MySQL
 - OpenStreetMap
@@ -69,7 +69,7 @@ A full-stack smart public transportation system that helps passengers search rou
 - Nominatim
 - AI API
 
-### Testing and Tools
+### Testing and Development Tools
 
 - JUnit
 - Mockito
@@ -80,21 +80,21 @@ A full-stack smart public transportation system that helps passengers search rou
 ## System Architecture
 
 ```text
-React Frontend
-      |
-      | REST API / WebSocket
-      |
-Spring Boot Backend
-      |
-      +------ MySQL
-      |
-      +------ AI API
-      |
-      +------ OpenStreetMap
-      |
-      +------ OSRM
-      |
-      +------ Nominatim
+                    React Frontend
+                          |
+                   REST API / WebSocket
+                          |
+                          v
+                  Spring Boot Backend
+                          |
+              +-----------+-----------+
+              |           |           |
+              v           v           v
+            MySQL       AI API    Map Services
+                                    |
+                         +----------+----------+
+                         |          |          |
+                    OpenStreetMap  OSRM   Nominatim
 ```
 
 ## Real-Time Bus Tracking
@@ -103,23 +103,23 @@ The system uses the driver's browser or device location. No separate GPS hardwar
 
 ```text
 Driver Device
-      |
-Browser GPS
-      |
+     |
+Browser Geolocation API
+     |
 Latitude and Longitude
-      |
+     |
 WebSocket / STOMP
-      |
+     |
 Spring Boot Backend
-      |
+     |
 Live Location Broadcast
-      |
+     |
 Passenger React Application
-      |
+     |
 Leaflet Map
 ```
 
-The driver starts a trip and shares the current location. The backend receives the location and broadcasts it to passengers using WebSocket.
+The driver starts a trip and shares the current location. The backend receives the location and broadcasts the location to subscribed passengers through WebSocket.
 
 ## User Roles
 
@@ -136,7 +136,7 @@ The driver starts a trip and shares the current location. The backend receives t
 - Submit feedback
 - Use AI travel assistant
 - Use voice search
-- Change language
+- Change application language
 - View trip information
 
 ### Driver
@@ -176,7 +176,7 @@ Security features:
 - CORS configuration
 - Environment variables for sensitive data
 
-Roles:
+Application roles:
 
 ```text
 PASSENGER
@@ -286,7 +286,7 @@ AI-Smart-Transit-Assistant-Real-Time-Bus-Tracking-System/
 |   |
 |   ├── src/
 |   |   ├── main/
-|   |   |   ├── java/com/transit/
+|   |   |   ├── java/
 |   |   |   └── resources/
 |   |   └── test/
 |   |
@@ -298,25 +298,183 @@ AI-Smart-Transit-Assistant-Real-Time-Bus-Tracking-System/
 └── .env.example
 ```
 
-## Backend Structure
+## Complete Backend Folder Structure
 
 ```text
-com.transit
+transit-backend/
 |
-├── config
-├── security
-├── controller
-├── service
-|   └── impl
-├── repository
-├── entity
-├── enums
-├── dto
-|   ├── request
-|   └── response
-├── websocket
-├── exception
-└── util
+├── src/
+|   |
+|   ├── main/
+|   |   |
+|   |   ├── java/
+|   |   |   |
+|   |   |   └── com/
+|   |   |       |
+|   |   |       └── transit/
+|   |   |           |
+|   |   |           ├── TransitApplication.java
+|   |   |           |
+|   |   |           ├── config/
+|   |   |           |   ├── SecurityConfig.java
+|   |   |           |   ├── WebSocketConfig.java
+|   |   |           |   ├── CorsConfig.java
+|   |   |           |   └── SwaggerConfig.java
+|   |   |           |
+|   |   |           ├── security/
+|   |   |           |   ├── JwtTokenProvider.java
+|   |   |           |   ├── JwtAuthFilter.java
+|   |   |           |   └── CustomUserDetailsService.java
+|   |   |           |
+|   |   |           ├── controller/
+|   |   |           |   ├── AuthController.java
+|   |   |           |   ├── UserController.java
+|   |   |           |   ├── RouteController.java
+|   |   |           |   ├── BusController.java
+|   |   |           |   ├── TripController.java
+|   |   |           |   ├── ETAController.java
+|   |   |           |   ├── AssistantController.java
+|   |   |           |   ├── FeedbackController.java
+|   |   |           |   ├── CrowdReportController.java
+|   |   |           |   ├── DriverController.java
+|   |   |           |   └── AdminController.java
+|   |   |           |
+|   |   |           ├── service/
+|   |   |           |   ├── AuthService.java
+|   |   |           |   ├── UserService.java
+|   |   |           |   ├── RouteService.java
+|   |   |           |   ├── BusService.java
+|   |   |           |   ├── TripService.java
+|   |   |           |   ├── BusTrackingService.java
+|   |   |           |   ├── ETAService.java
+|   |   |           |   ├── AIAssistantService.java
+|   |   |           |   ├── FeedbackService.java
+|   |   |           |   ├── CrowdReportService.java
+|   |   |           |   ├── DriverService.java
+|   |   |           |   ├── AdminService.java
+|   |   |           |
+|   |   |           |   └── impl/
+|   |   |           |       ├── AuthServiceImpl.java
+|   |   |           |       ├── UserServiceImpl.java
+|   |   |           |       ├── RouteServiceImpl.java
+|   |   |           |       ├── BusServiceImpl.java
+|   |   |           |       ├── TripServiceImpl.java
+|   |   |           |       ├── BusTrackingServiceImpl.java
+|   |   |           |       ├── ETAServiceImpl.java
+|   |   |           |       ├── AIAssistantServiceImpl.java
+|   |   |           |       ├── FeedbackServiceImpl.java
+|   |   |           |       ├── CrowdReportServiceImpl.java
+|   |   |           |       ├── DriverServiceImpl.java
+|   |   |           |       └── AdminServiceImpl.java
+|   |   |           |
+|   |   |           ├── repository/
+|   |   |           |   ├── UserRepository.java
+|   |   |           |   ├── RouteRepository.java
+|   |   |           |   ├── BusRepository.java
+|   |   |           |   ├── TripRepository.java
+|   |   |           |   ├── FeedbackRepository.java
+|   |   |           |   └── CrowdReportRepository.java
+|   |   |           |
+|   |   |           ├── entity/
+|   |   |           |   ├── User.java
+|   |   |           |   ├── Route.java
+|   |   |           |   ├── Bus.java
+|   |   |           |   ├── Trip.java
+|   |   |           |   ├── Feedback.java
+|   |   |           |   └── CrowdReport.java
+|   |   |           |
+|   |   |           ├── enums/
+|   |   |           |   ├── Role.java
+|   |   |           |   ├── BusStatus.java
+|   |   |           |   ├── TripStatus.java
+|   |   |           |   ├── CrowdLevel.java
+|   |   |           |   └── Sentiment.java
+|   |   |           |
+|   |   |           ├── dto/
+|   |   |           |   ├── request/
+|   |   |           |   └── response/
+|   |   |           |
+|   |   |           ├── websocket/
+|   |   |           |   ├── BusLocationHandler.java
+|   |   |           |   └── CrowdReportHandler.java
+|   |   |           |
+|   |   |           ├── exception/
+|   |   |           |   ├── GlobalExceptionHandler.java
+|   |   |           |   ├── ResourceNotFoundException.java
+|   |   |           |   ├── BadRequestException.java
+|   |   |           |   ├── UnauthorizedException.java
+|   |   |           |   └── ApiError.java
+|   |   |           |
+|   |   |           └── util/
+|   |   |               ├── DistanceCalculator.java
+|   |   |               └── DateTimeUtil.java
+|   |   |
+|   |   └── resources/
+|   |       ├── application.properties
+|   |       └── static/
+|   |
+|   └── test/
+|       └── java/
+|           └── com/
+|               └── transit/
+|
+├── pom.xml
+├── .gitignore
+├── .env.example
+└── README.md
+```
+
+## Backend Layer Responsibilities
+
+| Package | Responsibility |
+|---|---|
+| `config` | Application, security, CORS and WebSocket configuration |
+| `security` | JWT authentication and user security |
+| `controller` | REST API endpoints |
+| `service` | Business logic interfaces |
+| `service/impl` | Business logic implementations |
+| `repository` | Database operations using Spring Data JPA |
+| `entity` | Database entities |
+| `enums` | Roles and application status types |
+| `dto` | Request and response data |
+| `websocket` | Real-time communication |
+| `exception` | Exception and error handling |
+| `util` | Common utility functions |
+| `resources` | Application configuration |
+| `test` | Unit and integration tests |
+
+## Backend Request Flow
+
+```text
+Client
+   |
+Controller
+   |
+Service
+   |
+Repository
+   |
+MySQL Database
+```
+
+## Real-Time Location Flow
+
+```text
+Driver Browser
+      |
+Browser Geolocation API
+      |
+WebSocket / STOMP
+      |
+Spring Boot
+      |
+BusTrackingService
+      |
+WebSocket Broadcast
+      |
+Passenger React App
+      |
+Leaflet Map
 ```
 
 ## Main Controllers
@@ -421,15 +579,15 @@ GET /api/health
 
 Create environment files locally.
 
-Do not commit real passwords or API keys.
+Do not commit real passwords, secrets or API keys.
 
-Frontend example:
+### Frontend
 
 ```env
 VITE_API_URL=http://localhost:8080/api
 ```
 
-Backend example:
+### Backend
 
 ```env
 DB_URL=your_database_url
@@ -443,7 +601,7 @@ AI_API_KEY=your_ai_api_key
 
 ### Prerequisites
 
-Install:
+Install the following:
 
 - Java 17
 - Maven
@@ -460,13 +618,13 @@ Clone the repository:
 git clone https://github.com/divyaingaledev/AI-Smart-Transit-Assistant-Real-Time-Bus-Tracking-System.git
 ```
 
-Open the backend:
+Go to the backend:
 
 ```bash
-cd transit-backend
+cd AI-Smart-Transit-Assistant-Real-Time-Bus-Tracking-System/transit-backend
 ```
 
-Configure MySQL and environment variables.
+Configure MySQL and the required environment variables.
 
 Build the project:
 
@@ -488,10 +646,10 @@ http://localhost:8080
 
 ## Frontend Setup
 
-Open another terminal:
+Open another terminal and go to the frontend:
 
 ```bash
-cd transit-frontend
+cd AI-Smart-Transit-Assistant-Real-Time-Bus-Tracking-System/transit-frontend
 ```
 
 Install dependencies:
@@ -500,7 +658,7 @@ Install dependencies:
 npm install
 ```
 
-Start the frontend:
+Start the development server:
 
 ```bash
 npm run dev
@@ -515,6 +673,8 @@ http://localhost:5173
 ## Testing
 
 ### Backend Testing
+
+Run:
 
 ```bash
 mvn test
