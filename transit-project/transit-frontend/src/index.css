@@ -1,0 +1,177 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900 antialiased;
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+/* Reusable component classes */
+@layer components {
+  /* Card */
+  .card {
+    @apply bg-white rounded-2xl shadow-md p-6;
+  }
+
+  /* Card with hover effect */
+  .card-hover {
+    @apply bg-white rounded-2xl shadow-md p-6 transition-all duration-300;
+  }
+
+  .card-hover:hover {
+    @apply shadow-xl -translate-y-1;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-lg px-5 py-2.5 transition-colors;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-lg px-5 py-2.5 transition-colors;
+  }
+
+  /* Outline button */
+  .btn-outline {
+    @apply border border-brand-600 text-brand-600 hover:bg-brand-600 hover:text-white font-medium rounded-lg px-5 py-2.5 transition-colors;
+  }
+
+  /* Form input */
+  .input-field {
+    @apply border border-gray-300 rounded-lg px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all;
+  }
+
+  /* Page container */
+  .page-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10;
+  }
+
+  /* Hero section */
+  .hero-section {
+    @apply relative min-h-[650px] flex items-center overflow-hidden text-white;
+  }
+
+  /* Hero background image */
+  .hero-image {
+    @apply absolute inset-0 w-full h-full object-cover;
+  }
+
+  /* Hero dark overlay */
+  .hero-overlay {
+    @apply absolute inset-0 bg-black/60;
+  }
+
+  /* Hero blue overlay */
+  .hero-blue-overlay {
+    @apply absolute inset-0 bg-brand-700/20;
+  }
+
+  /* Hero content */
+  .hero-content {
+    @apply relative z-10 w-full;
+  }
+
+  /* Hero icon */
+  .hero-icon {
+    @apply w-24 h-24 rounded-3xl bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center mx-auto mb-6;
+  }
+
+  /* Hero primary button */
+  .hero-primary-btn {
+    @apply inline-flex items-center justify-center gap-2 bg-white text-brand-700 hover:bg-brand-50 font-medium rounded-lg px-5 py-2.5 transition-all duration-200 shadow-lg;
+  }
+
+  /* Hero secondary button */
+  .hero-secondary-btn {
+    @apply inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-medium rounded-lg px-5 py-2.5 transition-all duration-200;
+  }
+
+  /* Backend status */
+  .status-container {
+    @apply flex items-center justify-center gap-2 mt-8 text-xs text-white/80;
+  }
+
+  /* Status dot */
+  .status-dot {
+    @apply w-2 h-2 rounded-full;
+  }
+
+  /* Section title */
+  .section-title {
+    @apply text-2xl sm:text-3xl font-bold text-center;
+  }
+
+  /* Section subtitle */
+  .section-subtitle {
+    @apply text-gray-500 text-center max-w-2xl mx-auto mt-3;
+  }
+
+  /* Feature icon */
+  .feature-icon {
+    @apply w-10 h-10 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center mb-4;
+  }
+
+  /* Navigation link */
+  .nav-link {
+    @apply text-gray-600 hover:text-brand-600 font-medium transition-colors;
+  }
+
+  /* Loading spinner */
+  .loading-spinner {
+    @apply w-6 h-6 border-2 border-gray-300 border-t-brand-600 rounded-full animate-spin;
+  }
+}
+
+/* Prevent image dragging */
+.hero-section img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Text selection */
+::selection {
+  @apply bg-brand-600 text-white;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 640px) {
+  .hero-section {
+    min-height: 600px;
+  }
+
+  .hero-icon {
+    @apply w-20 h-20;
+  }
+
+  .page-container {
+    @apply py-8;
+  }
+}
+

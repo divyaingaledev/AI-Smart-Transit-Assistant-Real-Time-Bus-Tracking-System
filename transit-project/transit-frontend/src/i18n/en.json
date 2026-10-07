@@ -1,0 +1,145 @@
+
+{
+  "app": {
+    "title": "AI Smart Transit Assistant"
+  },
+  "nav": {
+    "home": "Home",
+    "routes": "Routes",
+    "tracking": "Live Tracking",
+    "assistant": "Ask AI",
+    "dashboard": "My Dashboard",
+    "driver": "Driver",
+    "admin": "Admin",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "home": {
+    "heroTitle": "AI Smart Transit Assistant",
+    "heroSubtitle": "Real-time bus tracking, AI-powered route help, and live crowd insights — all in one place.",
+    "searchRoute": "Search a Route",
+    "askAssistant": "Ask the AI Assistant",
+    "backendConnected": "Backend connected",
+    "backendNotReachable": "Backend not reachable",
+    "featuresHeading": "Everything you need to commute smarter",
+    "featureLiveTrackingTitle": "Live Tracking",
+    "featureLiveTrackingDesc": "See your bus move on the map in real time.",
+    "featureEtaTitle": "Smart ETA",
+    "featureEtaDesc": "Know exactly when your bus will arrive.",
+    "featureAiTitle": "AI Assistant",
+    "featureAiDesc": "Ask in plain language how to reach anywhere.",
+    "featureVoiceTitle": "Voice Search",
+    "featureVoiceDesc": "Just speak your destination, no typing.",
+    "featureCrowdTitle": "Crowd Reports",
+    "featureCrowdDesc": "See how crowded a bus is before you board.",
+    "featureLangTitle": "Multi-language",
+    "featureLangDesc": "Use the app in English, Hindi or Marathi."
+  },
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "loginSubtitle": "Log in to continue your journey",
+    "email": "Email",
+    "password": "Password",
+    "logIn": "Log In",
+    "loggingIn": "Logging in...",
+    "noAccount": "No account?",
+    "registerHere": "Register here",
+    "invalidCredentials": "Invalid email or password",
+    "createAccount": "Create account",
+    "registerSubtitle": "Join as a passenger, driver, or admin",
+    "fullName": "Full name",
+    "rolePassenger": "Passenger",
+    "roleDriver": "Driver",
+    "roleAdmin": "Admin",
+    "register": "Register",
+    "creatingAccount": "Creating account...",
+    "haveAccount": "Already have an account?",
+    "registerFailed": "Could not register — email may already be in use"
+  },
+  "assistant": {
+    "heading": "Ask the Travel Assistant",
+    "subheading": "Type or speak your question — e.g. \"How do I reach Aundh from Pune Station?\"",
+    "placeholder": "How do I reach Aundh from Pune Station?",
+    "emptyState": "Ask me anything about your route 👋",
+    "thinking": "AI is typing...",
+    "send": "Send",
+    "errorMessage": "Sorry, something went wrong."
+  },
+  "routes": {
+    "heading": "Find a Route",
+    "fromPlaceholder": "From (e.g. Pune Station)",
+    "toPlaceholder": "To (e.g. Aundh)",
+    "searchButton": "Search",
+    "noRoutes": "No routes found for that search.",
+    "km": "km"
+  },
+  "tracking": {
+    "heading": "Live Bus Tracking",
+    "subheading": "Choose where you're starting from and where you're going to see matching buses and track them live.",
+    "fromPlaceholder": "From (e.g. Aundh)",
+    "toPlaceholder": "To (e.g. Satara)",
+    "searchButton": "Search",
+    "noBuses": "No buses found for that route.",
+    "route": "Route",
+    "bus": "Bus",
+    "departure": "Departure",
+    "arrival": "Arrival",
+    "trackLive": "Track live",
+    "liveLocation": "Live location"
+  },
+  "footer": {
+    "title": "AI Smart Transit Assistant",
+    "description": "Smart, reliable and real-time public transportation assistance.",
+    "rights": "All rights reserved."
+  },
+  "adminPanel": {
+  "title": "Admin Panel",
+  "description": "Manage routes, buses, drivers and view analytics."
+},
+"userPanel": {
+  "title": "User Dashboard",
+  "description": "View saved routes, trip history and notification preferences."
+},
+"driverPanel": {
+  "title": "Driver Panel",
+  "description": "Start or end trips and manage GPS location broadcasting."
+},
+"adminDashboard": {
+  "welcome": "Welcome",
+  "description": "Manage buses, routes, timetables, and driver assignments.",
+  "tabs": {
+    "buses": "Buses",
+    "routes": "Routes",
+    "schedules": "Timetable",
+    "drivers": "Assign Drivers"
+  }
+},
+"driverDashboard": {
+  "welcome": "Welcome",
+  "description": "Start your trip to broadcast your live location to passengers.",
+  "noBus": "No bus assigned to you yet — contact your admin.",
+  "tripInProgress": "Trip in progress",
+  "tripNotStarted": "Trip not started",
+  "bus": "Bus",
+  "startTrip": "Start Trip",
+  "endTrip": "End Trip",
+  "lastBroadcast": "Last broadcast"
+},
+"userDashboard": {
+  "welcome": "Welcome",
+  "description": "Find a bus and track it live, or send us feedback.",
+  "loading": "Loading...",
+  "findBus": "Find a Bus",
+  "sendFeedback": "Send Feedback"
+},
+"feedback": {
+  "placeholder": "Tell us about your trip...",
+  "submit": "Submit Feedback",
+  "submitting": "Submitting...",
+  "submitted": "Feedback submitted",
+  "sentiment": "sentiment",
+  "submitError": "Failed to submit feedback (status {{status}})."
+},
+"voiceUnsupported": "Voice search isn't supported in this browser",
+"voiceSearch": "Voice search"
+}
