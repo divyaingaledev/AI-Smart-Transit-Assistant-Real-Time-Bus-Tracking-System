@@ -10,7 +10,7 @@ A full-stack smart public transportation system that helps passengers search rou
 - Bus and route search
 - Real-time bus tracking
 - Browser/device GPS for driver location
-- WebSocket + STOMP for live location updates
+- WebSocket and STOMP for live location updates
 - ETA calculation
 - Delay prediction
 - AI travel assistant
@@ -21,13 +21,11 @@ A full-stack smart public transportation system that helps passengers search rou
 - Route calculation using OSRM
 - Location search using Nominatim
 - English, Hindi and Marathi language support
-- Admin dashboard
-- Driver dashboard
 - Passenger dashboard
+- Driver dashboard
+- Admin dashboard
 - Trip management
 - User, bus and route management
-
-![Uploading HomePage.png…]()
 
 ## Technology Stack
 
@@ -63,7 +61,7 @@ A full-stack smart public transportation system that helps passengers search rou
 - SockJS
 - Maven
 
-### Database & External APIs
+### Database and APIs
 
 - MySQL
 - OpenStreetMap
@@ -71,7 +69,7 @@ A full-stack smart public transportation system that helps passengers search rou
 - Nominatim
 - AI API
 
-### Testing & Development
+### Testing and Tools
 
 - JUnit
 - Mockito
@@ -82,60 +80,46 @@ A full-stack smart public transportation system that helps passengers search rou
 ## System Architecture
 
 ```text
-                    ┌─────────────────────┐
-                    │   React Frontend    │
-                    │                     │
-                    │ Passenger / Driver  │
-                    │       / Admin       │
-                    └──────────┬──────────┘
-                               │
-                    REST API / WebSocket
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │   Spring Boot API   │
-                    │                     │
-                    │ Security / Services │
-                    │ Controllers / JPA   │
-                    └──────┬───────┬──────┘
-                           │       │
-                    ┌──────▼───┐   │
-                    │  MySQL   │   │
-                    └──────────┘   │
-                                   │
-                    ┌──────────────▼────────────┐
-                    │ External Services         │
-                    │                            │
-                    │ AI API                     │
-                    │ OpenStreetMap              │
-                    │ OSRM                       │
-                    │ Nominatim                  │
-                    └────────────────────────────┘
+React Frontend
+      |
+      | REST API / WebSocket
+      |
+Spring Boot Backend
+      |
+      +------ MySQL
+      |
+      +------ AI API
+      |
+      +------ OpenStreetMap
+      |
+      +------ OSRM
+      |
+      +------ Nominatim
 ```
 
 ## Real-Time Bus Tracking
 
-The system uses the driver's browser/device location instead of requiring separate GPS hardware.
+The system uses the driver's browser or device location. No separate GPS hardware is required for the basic implementation.
 
 ```text
 Driver Device
-     ↓
+      |
 Browser GPS
-     ↓
-Latitude + Longitude
-     ↓
+      |
+Latitude and Longitude
+      |
 WebSocket / STOMP
-     ↓
+      |
 Spring Boot Backend
-     ↓
+      |
 Live Location Broadcast
-     ↓
+      |
 Passenger React Application
-     ↓
+      |
 Leaflet Map
 ```
 
-The driver starts a trip and shares the current latitude and longitude. The backend receives the location and broadcasts it to subscribed passengers through WebSocket.
+The driver starts a trip and shares the current location. The backend receives the location and broadcasts it to passengers using WebSocket.
 
 ## User Roles
 
@@ -143,17 +127,16 @@ The driver starts a trip and shares the current latitude and longitude. The back
 
 - Register and login
 - Search source and destination
-- Find available routes
-- Search buses
-- View route information
+- Search available buses
+- View routes
 - Track buses in real time
-- View estimated arrival time
+- View ETA
 - View delay information
 - Report crowd level
 - Submit feedback
 - Use AI travel assistant
 - Use voice search
-- Change application language
+- Change language
 - View trip information
 
 ### Driver
@@ -179,22 +162,21 @@ The driver starts a trip and shares the current latitude and longitude. The back
 - View active buses
 - Manage transportation data
 
-## Authentication & Security
+## Authentication and Security
 
 The application uses Spring Security and JWT authentication.
 
-Security features include:
+Security features:
 
-- JWT-based authentication
+- JWT authentication
 - BCrypt password hashing
 - Role-based authorization
 - Protected REST APIs
 - Secure driver and admin endpoints
-- Environment variables for sensitive configuration
 - CORS configuration
-- Token-based frontend authentication
+- Environment variables for sensitive data
 
-Example roles:
+Roles:
 
 ```text
 PASSENGER
@@ -202,78 +184,71 @@ DRIVER
 ADMIN
 ```
 
-## Main Application Flow
+## Application Flow
 
 ```text
 Home Page
-    ↓
+    |
 Register
-    ↓
+    |
 Login
-    ↓
-Enter Source & Destination
-    ↓
-Search Available Routes/Buses
-    ↓
+    |
+Enter Source and Destination
+    |
+Search Routes and Buses
+    |
 View Route Details
-    ↓
+    |
 Track Bus
-    ↓
-View ETA / Delay
-    ↓
-Use AI Assistant / Crowd Report / Feedback
+    |
+View ETA and Delay
+    |
+AI Assistant / Crowd Report / Feedback
 ```
 
 ## AI Travel Assistant
 
-The AI assistant helps passengers with transportation-related queries.
+The AI assistant provides transportation-related support.
 
-Possible use cases:
+Features include:
 
 - Route assistance
 - Travel suggestions
 - Bus information
-- ETA-related questions
-- General transportation queries
+- ETA-related queries
+- General transportation assistance
 - Passenger support
+- Feedback sentiment analysis
 
-The system can also use AI-based sentiment analysis for passenger feedback.
-
-## Maps & Routing
-
-The application uses open-source mapping services.
+## Maps and Routing
 
 ### OpenStreetMap
 
-Used for map data and visualization.
+Used for map data and map visualization.
 
 ### Leaflet
 
-Used to display interactive maps in the React application.
+Used to display interactive maps in the React frontend.
 
 ### OSRM
 
-Used for route calculation and road-based distance/direction information.
+Used for route calculation and road-based distance information.
 
 ### Nominatim
 
-Used for geocoding and location search.
+Used for location search and geocoding.
 
 ## Multi-Language Support
 
-The frontend supports:
+The application supports:
 
 - English
 - Hindi
 - Marathi
 
-Internationalization is implemented using:
+Internationalization is implemented using `react-i18next`.
 
-```text
-react-i18next
-```
-
-Language resources are maintained separately:
+Language files:
 
 ```text
 i18n/
@@ -286,79 +261,65 @@ i18n/
 
 ```text
 AI-Smart-Transit-Assistant-Real-Time-Bus-Tracking-System/
-│
+|
 ├── transit-frontend/
-│   │
-│   ├── public/
-│   │
-│   ├── src/
-│   │   ├── api/
-│   │   ├── components/
-│   │   │   ├── common/
-│   │   │   ├── map/
-│   │   │   ├── assistant/
-│   │   │   ├── passenger/
-│   │   │   ├── driver/
-│   │   │   └── admin/
-│   │   │
-│   │   ├── context/
-│   │   ├── hooks/
-│   │   ├── pages/
-│   │   ├── i18n/
-│   │   ├── utils/
-│   │   ├── websocket/
-│   │   ├── App.jsx
-│   │   ├── index.css
-│   │   └── main.jsx
-│   │
-│   ├── package.json
-│   ├── vite.config.js
-│   └── .env.example
-│
+|   |
+|   ├── public/
+|   ├── src/
+|   |   ├── api/
+|   |   ├── components/
+|   |   ├── context/
+|   |   ├── hooks/
+|   |   ├── pages/
+|   |   ├── i18n/
+|   |   ├── utils/
+|   |   ├── websocket/
+|   |   ├── App.jsx
+|   |   ├── index.css
+|   |   └── main.jsx
+|   |
+|   ├── package.json
+|   ├── vite.config.js
+|   └── .env.example
+|
 ├── transit-backend/
-│   │
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/com/transit/
-│   │   │   │
-│   │   │   └── resources/
-│   │   │
-│   │   └── test/
-│   │
-│   ├── pom.xml
-│   └── .env.example
-│
+|   |
+|   ├── src/
+|   |   ├── main/
+|   |   |   ├── java/com/transit/
+|   |   |   └── resources/
+|   |   └── test/
+|   |
+|   ├── pom.xml
+|   └── .env.example
+|
 ├── README.md
 ├── .gitignore
 └── .env.example
 ```
 
-## Backend Package Structure
+## Backend Structure
 
 ```text
 com.transit
-│
+|
 ├── config
 ├── security
 ├── controller
 ├── service
-│   └── impl
+|   └── impl
 ├── repository
 ├── entity
 ├── enums
 ├── dto
-│   ├── request
-│   └── response
+|   ├── request
+|   └── response
 ├── websocket
 ├── exception
 └── util
 ```
 
-## Important Backend Components
-
-### Controllers
-
-Handle REST API requests.
+## Main Controllers
 
 ```text
 AuthController
@@ -374,9 +335,7 @@ DriverController
 AdminController
 ```
 
-### Services
-
-Contain the main business logic.
+## Main Services
 
 ```text
 AuthService
@@ -393,9 +352,7 @@ DriverService
 AdminService
 ```
 
-### Repositories
-
-Spring Data JPA repositories are used to communicate with MySQL.
+## Repositories
 
 ```text
 UserRepository
@@ -410,7 +367,7 @@ CrowdReportRepository
 
 The application uses MySQL.
 
-Main entities include:
+Main entities:
 
 ```text
 User
@@ -421,9 +378,7 @@ Feedback
 CrowdReport
 ```
 
-The database stores users, transportation information, trips, feedback and crowd reports.
-
-## Important API Endpoints
+## API Endpoints
 
 ### Authentication
 
@@ -432,25 +387,25 @@ POST /api/auth/register
 POST /api/auth/login
 ```
 
-### Health
+### Health Check
 
 ```text
 GET /api/health
 ```
 
-### Passenger
+### Passenger APIs
 
 ```text
 /api/passenger/**
 ```
 
-### Driver
+### Driver APIs
 
 ```text
 /api/driver/**
 ```
 
-### Admin
+### Admin APIs
 
 ```text
 /api/admin/**
@@ -464,9 +419,11 @@ GET /api/health
 
 ## Environment Variables
 
-Create environment files locally and never commit real secrets.
+Create environment files locally.
 
-Example:
+Do not commit real passwords or API keys.
+
+Frontend example:
 
 ```env
 VITE_API_URL=http://localhost:8080/api
@@ -482,11 +439,11 @@ JWT_SECRET=your_jwt_secret
 AI_API_KEY=your_ai_api_key
 ```
 
-## Installation & Setup
+## Installation
 
 ### Prerequisites
 
-Install the following:
+Install:
 
 - Java 17
 - Maven
@@ -503,7 +460,7 @@ Clone the repository:
 git clone https://github.com/divyaingaledev/AI-Smart-Transit-Assistant-Real-Time-Bus-Tracking-System.git
 ```
 
-Go to backend:
+Open the backend:
 
 ```bash
 cd transit-backend
@@ -517,13 +474,13 @@ Build the project:
 mvn clean install
 ```
 
-Run Spring Boot:
+Run the backend:
 
 ```bash
 mvn spring-boot:run
 ```
 
-Backend runs on:
+Backend URL:
 
 ```text
 http://localhost:8080
@@ -543,13 +500,13 @@ Install dependencies:
 npm install
 ```
 
-Start the development server:
+Start the frontend:
 
 ```bash
 npm run dev
 ```
 
-Frontend runs on:
+Frontend URL:
 
 ```text
 http://localhost:5173
@@ -557,15 +514,13 @@ http://localhost:5173
 
 ## Testing
 
-### Backend
-
-Run tests using:
+### Backend Testing
 
 ```bash
 mvn test
 ```
 
-Testing technologies:
+Testing tools:
 
 - JUnit
 - Mockito
@@ -574,34 +529,15 @@ Testing technologies:
 
 Postman can be used to test:
 
-- Authentication
+- Authentication APIs
 - User APIs
 - Route APIs
 - Bus APIs
 - Trip APIs
-- Admin APIs
 - Driver APIs
+- Admin APIs
 
-## GitHub
-
-Repository:
-
-**AI Smart Transit Assistant / Real Time Bus Tracking System**
-
-The project demonstrates:
-
-- Full-stack development
-- REST API development
-- JWT authentication
-- Role-based security
-- Real-time communication
-- WebSocket implementation
-- Database integration
-- Interactive maps
-- AI integration
-- Responsive React UI
-
-## Security Note
+## Security
 
 Never upload sensitive information to GitHub.
 
@@ -616,7 +552,7 @@ Cloud credentials
 Private tokens
 ```
 
-Use `.env.example` to show the required configuration without exposing real credentials.
+Use `.env.example` to show the required configuration.
 
 ## Future Enhancements
 
@@ -632,7 +568,7 @@ Use `.env.example` to show the required configuration without exposing real cred
 
 ## Project Highlight
 
-**Real-time bus tracking using browser GPS, WebSocket/STOMP, Spring Boot and interactive Leaflet maps.**
+**Real-time bus tracking using browser GPS, WebSocket/STOMP, Spring Boot, React and Leaflet.**
 
 ## Author
 
@@ -640,4 +576,4 @@ Use `.env.example` to show the required configuration without exposing real cred
 
 Java Developer | Full Stack Developer
 
-Technologies: Java, Spring Boot, React, MySQL, REST APIs, JWT, Hibernate, WebSocket
+**Technologies:** Java, Spring Boot, React, MySQL, REST APIs, JWT, Hibernate, WebSocket
