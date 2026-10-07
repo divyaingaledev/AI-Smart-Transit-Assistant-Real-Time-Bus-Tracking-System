@@ -27,6 +27,8 @@ A full-stack smart public transportation system that helps passengers search rou
 - Trip management
 - User, bus and route management
 
+![Uploading HomePage.png…]()
+
 ## Technology Stack
 
 ### Frontend
